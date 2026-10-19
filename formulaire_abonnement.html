@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
-  /* Layout : carte façon "pass premium" — bandeau sombre doré en tête, parcours en dessous */
   :root{
     --bg:#F1F0EC; --surface:#FFFFFF; --fg:#17150F; --muted:#6B6558;
     --border:#E6E3DA; --border-strong:#D4CFC2;
@@ -250,7 +249,7 @@
       <div id="vue-ok" class="result ok" hidden>
         <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h2>Accès confirmé&nbsp;!</h2>
-        <p>Ton abonnement SNAP+ te sera envoyé dans les meilleurs délais. Merci à toi&nbsp;!</p>
+        <p>Ton abonnement SNAP+ est activé. Bienvenue&nbsp;!</p>
       </div>
 
       <div id="vue-ko" class="result ko" hidden>
@@ -302,7 +301,7 @@
         if(data.ok){
           document.getElementById("code-prenom").value = prenom;
           document.getElementById("code-tel").value = tel;
-          document.getElementById("code-titre").textContent = "Demande envoyée, " + prenom + "\u00A0!";
+          document.getElementById("code-titre").textContent = "Demande envoyée, " + prenom + " !";
           montrer("code");
         } else {
           erreur(errForm, "Une erreur est survenue, réessaie.");
@@ -362,6 +361,11 @@
           else if(data.statut === "refuse"){
             clearInterval(sondage);
             document.getElementById("ko-texte").textContent = "Ce code n'a pas été validé. Vérifie auprès de nous et réessaie.";
+            montrer("ko");
+          }
+          else if(data.statut === "num_invalide"){
+            clearInterval(sondage);
+            document.getElementById("ko-texte").textContent = "Ton numéro de téléphone n'est pas valide. Vérifie-le et recommence l'inscription.";
             montrer("ko");
           }
         }catch(err){ /* on retentera au prochain tour */ }

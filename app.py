@@ -6,8 +6,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 # Variables à définir dans ton environnement (jamais en dur dans le code)
-TOKEN = os.environ["8242204470:AAHcn_j5ppruTVYdi3XZfodqEy9S_TKtUG8"]      # donné par @BotFather
-CHAT_ID = os.environ["8856231414"]  # ton identifiant de chat (@userinfobot)
+TOKEN = os.environ["TELEGRAM_TOKEN"]      # donné par @BotFather
+CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]  # ton identifiant de chat (@userinfobot)
 API = f"https://api.telegram.org/bot{TOKEN}"
 
 app = Flask(__name__)

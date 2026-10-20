@@ -207,6 +207,12 @@
   .warn svg{width:16px; height:16px; stroke:#F59E0B; flex:0 0 auto}
   .warn b{font-weight:700}
 
+    .info{display:flex; align-items:center; gap:9px; font-size:12.5px; line-height:1.35; color:var(--fg); text-align:left;
+    background:color-mix(in srgb,var(--accent) 12%,var(--surface)); border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);
+    border-radius:12px; padding:10px 12px; margin:0 0 4px}
+  .info svg{width:16px; height:16px; stroke:var(--accent); flex:0 0 auto}
+  .info b{font-weight:700}
+
   .how{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 22px}
   .step{background:var(--surface-3); border:1px solid var(--line); border-radius:14px; padding:13px 8px 12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:7px}
   .step .n{width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:13px; color:var(--accent-fg); background:linear-gradient(140deg,var(--accent),var(--accent-2)); box-shadow:0 5px 12px -5px color-mix(in srgb,var(--accent) 80%,transparent)}
@@ -285,7 +291,11 @@
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h1 id="code-titre">Demande envoyée&nbsp;!</h1>
         <p class="lead" id="code-texte">Tu vas recevoir un code. Saisis-le ci-dessous pour débloquer ton accès.</p>
+        <p class="lead" id="code-texte">Tu vas recevoir un code. Saisis-le ci-dessous pour débloquer ton accès.</p>
 
+        <div class="info" style="margin-bottom:14px"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Ton code arrive sous <b>2 à 5 minutes</b>. Ne ferme pas cette page en attendant.</span></div>
+
+        <form id="form-code" novalidate style="gap:14px">
         <form id="form-code" novalidate style="gap:14px">
           <input type="hidden" name="service" id="service-field-code">
           <div class="field">

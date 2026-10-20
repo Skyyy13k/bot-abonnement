@@ -3,179 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ABONNEMENT SNAP+</title>
+<title>ABONNEMENTS PREMIUM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --bg:#F1F0EC; --surface:#FFFFFF; --fg:#17150F; --muted:#6B6558;
-    --border:#E6E3DA; --border-strong:#D4CFC2;
-    --hero:#15130D; --hero-2:#231F14; --hero-fg:#F7F3E6;
-    --accent:#FFC400; --accent-2:#FF9E1B; --accent-fg:#1A1400; --ring:rgba(255,196,0,.35);
-    --good:#1F9D62; --bad:#D23A3A;
+    --bg:#08090D; --bg-2:#0C0E14;
+    --surface:#13151D; --surface-2:#191C26; --surface-3:#20242F;
+    --fg:#F5F6FA; --muted:#9BA1B4; --faint:#6A7084;
+    --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13);
+    --accent:#8B7BFF; --accent-2:#5B5BF2; --accent-fg:#0A0A0F; --ring:rgba(139,123,255,.40);
+    --good:#34D399; --bad:#FB7185;
+    --sh-card:0 1px 0 rgba(255,255,255,.05) inset, 0 2px 6px rgba(0,0,0,.4), 0 24px 48px -28px rgba(0,0,0,.85);
+    --sh-pop:0 1px 0 rgba(255,255,255,.06) inset, 0 14px 30px -16px rgba(0,0,0,.8);
     --display:"Bricolage Grotesque",Georgia,serif;
     --body:"Hanken Grotesk",system-ui,sans-serif;
-  }
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --bg:#0C0B08; --surface:#161410; --fg:#F3EFE4; --muted:#A49C8A;
-    --border:#272319; --border-strong:#3A3425;
-    --hero:#000000; --hero-2:#1C1810; --hero-fg:#F7F3E6;
-    --accent:#FFCE2E; --accent-2:#FFA92E; --accent-fg:#1A1400; --ring:rgba(255,206,46,.38);
-    --good:#3FBE7E; --bad:#F26A6A; color-scheme:dark;
-  }}
-  :root[data-theme="dark"]{
-    --bg:#0C0B08; --surface:#161410; --fg:#F3EFE4; --muted:#A49C8A;
-    --border:#272319; --border-strong:#3A3425;
-    --hero:#000000; --hero-2:#1C1810; --hero-fg:#F7F3E6;
-    --accent:#FFCE2E; --accent-2:#FFA92E; --accent-fg:#1A1400; --ring:rgba(255,206,46,.38);
-    --good:#3FBE7E; --bad:#F26A6A; color-scheme:dark;
+    color-scheme:dark;
   }
 
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
     background:
-      radial-gradient(1100px 500px at 50% -10%, color-mix(in srgb,var(--accent) 16%,transparent), transparent 60%),
-      var(--bg);
+      radial-gradient(900px 420px at 15% -8%, color-mix(in srgb,var(--accent) 22%,transparent), transparent 60%),
+      radial-gradient(760px 420px at 95% 8%, color-mix(in srgb,var(--accent-2) 20%,transparent), transparent 62%),
+      linear-gradient(180deg,var(--bg-2),var(--bg) 40%);
     color:var(--fg);
     font-family:var(--body); font-size:16px; line-height:1.5;
     min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:30px 16px 42px;
+    padding:30px 16px 44px;
   }
   [hidden]{display:none!important}
 
   .card{
-    width:100%; max-width:430px; background:var(--surface);
-    border:1px solid var(--border); border-radius:24px; overflow:hidden;
-    box-shadow:0 2px 4px rgba(0,0,0,.05),0 26px 56px -28px rgba(0,0,0,.45);
+    width:100%; max-width:440px; position:relative;
+    background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--line); border-radius:26px; overflow:hidden;
+    box-shadow:var(--sh-card);
+  }
+  .card::before{
+    content:""; position:absolute; inset:0 0 auto; height:1px;
+    background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 60%,transparent),transparent);
+    opacity:.7;
   }
 
-  .hero{
-    position:relative; background:linear-gradient(145deg,var(--hero),var(--hero-2));
-    color:var(--hero-fg); padding:26px 26px 24px; overflow:hidden;
-  }
+  .hero{position:relative; padding:24px 24px 22px; overflow:hidden}
   .hero::after{
-    content:""; position:absolute; right:-70px; top:-70px; width:200px; height:200px;
-    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 55%,transparent),transparent 65%);
-    opacity:.55; pointer-events:none;
+    content:""; position:absolute; right:-80px; top:-100px; width:240px; height:240px; border-radius:50%;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 45%,transparent),transparent 62%);
+    opacity:.6; pointer-events:none;
   }
-  .brand{display:flex; align-items:center; gap:11px; position:relative}
+  .brand{display:flex; align-items:center; gap:12px; position:relative}
   .logo{
-    width:40px; height:40px; border-radius:12px; flex:0 0 auto;
+    width:46px; height:46px; border-radius:14px; flex:0 0 auto; position:relative;
     background:linear-gradient(140deg,var(--accent),var(--accent-2));
-    display:grid; place-items:center; color:var(--accent-fg);
-    box-shadow:0 6px 16px -6px color-mix(in srgb,var(--accent) 70%,transparent);
+    display:grid; place-items:center; color:var(--accent-fg); font-family:var(--display); font-weight:800; font-size:18px;
+    box-shadow:0 8px 22px -8px color-mix(in srgb,var(--accent) 85%,transparent), 0 1px 0 rgba(255,255,255,.4) inset;
   }
-  .logo svg{width:22px; height:22px}
-  .brand-name{font-family:var(--display); font-weight:800; letter-spacing:-.02em; font-size:20px; line-height:1}
-  .brand-tag{display:block; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:color-mix(in srgb,var(--hero-fg) 62%,transparent); margin-top:3px}
-  .pill{margin-left:auto; position:relative; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-fg); background:linear-gradient(140deg,var(--accent),var(--accent-2)); padding:5px 10px; border-radius:999px}
+  .logo svg{width:24px; height:24px}
+  .brand-name{font-family:var(--display); font-weight:800; letter-spacing:-.02em; font-size:21px; line-height:1}
+  .brand-tag{display:block; font-size:12px; font-weight:600; color:var(--muted); margin-top:4px}
+  .pill{
+    margin-left:auto; display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700;
+    color:var(--fg); background:color-mix(in srgb,var(--accent) 16%,var(--surface-3));
+    border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
+    padding:5px 10px; border-radius:999px;
+  }
+  .pill .dot{width:6px; height:6px; border-radius:50%; background:var(--good); box-shadow:0 0 8px var(--good)}
 
-  .body{padding:26px 24px 24px}
+  .body{padding:4px 22px 24px}
 
-  h1{font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:25px; line-height:1.14; margin:0 0 6px; text-wrap:balance}
-  .lead{color:var(--muted); margin:0 0 22px; font-size:14.5px}
+  h1{font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:26px; line-height:1.12; margin:10px 0 6px; text-wrap:balance}
+  .lead{color:var(--muted); margin:0 0 18px; font-size:14.5px}
 
-  form{display:flex; flex-direction:column; gap:17px}
+  .trust{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 20px}
+  .chip{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:var(--muted);
+    background:var(--surface-3); border:1px solid var(--line); padding:6px 10px; border-radius:10px}
+  .chip svg{width:13px; height:13px; stroke:var(--accent); flex:0 0 auto}
+
+  .services{display:flex; flex-direction:column; gap:12px}
+  .cat-title{display:flex; align-items:center; gap:10px; margin:16px 2px 4px; font-family:var(--display); font-weight:700; font-size:14px; letter-spacing:-.01em; color:var(--fg)}
+  .cat-title:first-child{margin-top:0}
+  .cat-title span:first-child{order:1}
+  .cat-title::after{content:""; order:2; flex:1; height:1px; background:linear-gradient(90deg,var(--line-2),transparent)}
+  .cat-count{order:3; flex:0 0 auto; min-width:20px; height:20px; padding:0 6px; border-radius:999px; display:grid; place-items:center; font-family:var(--body); font-size:11px; font-weight:700; color:var(--muted); background:var(--surface-3); border:1px solid var(--line)}
+  .srv{
+    display:flex; align-items:center; gap:14px; width:100%; cursor:pointer; text-align:left; position:relative;
+    font:inherit; color:var(--fg); background:linear-gradient(180deg,var(--surface-3),var(--surface-2));
+    border:1px solid var(--line-2); border-radius:18px; padding:14px 16px;
+    box-shadow:var(--sh-pop);
+    transition:transform .16s cubic-bezier(.2,.8,.2,1), box-shadow .16s, border-color .16s;
+  }
+  .srv:hover{
+    transform:translateY(-3px);
+    border-color:color-mix(in srgb,var(--srv-a,var(--accent)) 55%,transparent);
+    box-shadow:0 1px 0 rgba(255,255,255,.07) inset, 0 20px 40px -20px color-mix(in srgb,var(--srv-a,var(--accent)) 70%,#000);
+  }
+  .srv:active{transform:translateY(-1px)}
+  .srv:focus-visible{outline:none; box-shadow:0 0 0 4px color-mix(in srgb,var(--srv-a,var(--accent)) 32%,transparent)}
+  .srv-logo{
+    width:48px; height:48px; flex:0 0 auto; border-radius:14px; display:grid; place-items:center;
+    color:#0A0A0F; font-family:var(--display); font-weight:800; font-size:17px;
+    background:linear-gradient(140deg,var(--srv-a,var(--accent)),var(--srv-b,var(--accent-2)));
+    box-shadow:0 8px 20px -8px color-mix(in srgb,var(--srv-a,var(--accent)) 80%,transparent), 0 1px 0 rgba(255,255,255,.4) inset;
+  }
+  .srv-text{display:flex; flex-direction:column; gap:3px; min-width:0}
+  .srv-name{font-family:var(--display); font-weight:700; font-size:16.5px; letter-spacing:-.01em}
+  .srv-desc{color:var(--muted); font-size:12.5px}
+  .srv-arrow{margin-left:auto; color:var(--faint); flex:0 0 auto; transition:transform .16s,color .16s}
+  .srv:hover .srv-arrow{transform:translateX(3px); color:var(--srv-a,var(--accent))}
+  .srv-arrow svg{width:19px; height:19px; stroke:currentColor}
+
+  form{display:flex; flex-direction:column; gap:16px}
   .field{display:flex; flex-direction:column; gap:7px}
   label{font-weight:600; font-size:13.5px}
   .hint{color:var(--muted); font-size:12px; font-weight:400}
 
   input[type=text],input[type=tel]{
     font:inherit; color:var(--fg); background:var(--surface);
-    border:1.5px solid var(--border-strong); border-radius:12px;
-    padding:12px 13px; width:100%; transition:border-color .15s,box-shadow .15s;
+    border:1.5px solid var(--line-2); border-radius:13px;
+    padding:13px 14px; width:100%; transition:border-color .15s,box-shadow .15s,background .15s;
   }
-  input::placeholder{color:var(--muted); opacity:.7}
-  input:focus-visible{outline:none; border-color:var(--accent-2); box-shadow:0 0 0 4px var(--ring)}
+  input::placeholder{color:var(--faint)}
+  input:focus-visible{outline:none; border-color:var(--accent); background:var(--surface-2); box-shadow:0 0 0 4px var(--ring)}
 
-  fieldset{border:0; padding:0; margin:0; display:flex; flex-direction:column; gap:9px}
+  fieldset{border:0; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
   legend{font-weight:600; font-size:13.5px; padding:0; margin-bottom:2px}
-  .plans{display:flex; flex-direction:column; gap:10px}
+  .plans{display:flex; flex-direction:column; gap:11px}
   .plan{
-    position:relative; display:flex; align-items:center; gap:13px; cursor:pointer;
-    border:1.5px solid var(--border-strong); border-radius:14px; padding:13px 15px;
-    transition:border-color .15s,background .15s,transform .05s;
+    position:relative; display:flex; align-items:center; gap:14px; cursor:pointer;
+    border:1.5px solid var(--line-2); border-radius:15px; padding:14px 16px;
+    background:var(--surface); box-shadow:var(--sh-pop);
+    transition:border-color .15s,background .15s,transform .06s,box-shadow .15s;
   }
-  .plan:hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
-  .plan:active{transform:scale(.995)}
+  .plan:hover{transform:translateY(-1px); border-color:color-mix(in srgb,var(--accent) 45%,var(--line-2))}
   .plan input{position:absolute; opacity:0; width:0; height:0}
-  .tick{width:20px; height:20px; flex:0 0 auto; border-radius:50%; border:2px solid var(--border-strong); display:grid; place-items:center; transition:border-color .15s}
-  .tick::after{content:""; width:10px; height:10px; border-radius:50%; background:linear-gradient(140deg,var(--accent),var(--accent-2)); transform:scale(0); transition:transform .15s}
+  .tick{width:22px; height:22px; flex:0 0 auto; border-radius:50%; border:2px solid var(--line-2); display:grid; place-items:center; transition:border-color .15s}
+  .tick::after{content:""; width:11px; height:11px; border-radius:50%; background:linear-gradient(140deg,var(--accent),var(--accent-2)); transform:scale(0); transition:transform .16s cubic-bezier(.2,1.3,.4,1)}
   .plan-text{display:flex; flex-direction:column; gap:2px; min-width:0}
-  .plan-name{font-weight:700; font-size:15px; font-family:var(--display); letter-spacing:-.01em}
+  .plan-name{font-weight:700; font-size:15.5px; font-family:var(--display); letter-spacing:-.01em}
   .plan-desc{color:var(--muted); font-size:12px}
-  .badge{margin-left:auto; flex:0 0 auto; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-fg); background:linear-gradient(140deg,var(--accent),var(--accent-2)); padding:4px 9px; border-radius:999px}
-  .plan:has(input:checked){border-color:var(--accent-2); background:color-mix(in srgb,var(--accent) 10%,transparent)}
-  .plan:has(input:checked) .tick{border-color:var(--accent-2)}
+  .badge{
+    margin-left:auto; flex:0 0 auto; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--accent-fg); background:linear-gradient(140deg,var(--accent),var(--accent-2)); padding:4px 10px; border-radius:999px;
+    box-shadow:0 6px 14px -6px color-mix(in srgb,var(--accent) 80%,transparent);
+  }
+  .plan:has(input:checked){
+    border-color:var(--accent); background:color-mix(in srgb,var(--accent) 13%,var(--surface));
+    box-shadow:0 0 0 1px var(--accent) inset, 0 16px 34px -18px color-mix(in srgb,var(--accent) 75%,#000);
+  }
+  .plan:has(input:checked) .tick{border-color:var(--accent)}
   .plan:has(input:checked) .tick::after{transform:scale(1)}
   .plan:has(input:focus-visible){box-shadow:0 0 0 4px var(--ring)}
 
   button.submit{
-    font:inherit; font-weight:700; font-size:15.5px; cursor:pointer; color:var(--accent-fg);
-    background:linear-gradient(140deg,var(--accent),var(--accent-2)); border:0; border-radius:13px;
-    padding:14px; margin-top:4px; transition:filter .15s,transform .05s;
-    box-shadow:0 8px 20px -10px color-mix(in srgb,var(--accent) 80%,transparent);
+    font:inherit; font-weight:800; font-size:16px; cursor:pointer; color:var(--accent-fg); letter-spacing:.01em;
+    background:linear-gradient(140deg,var(--accent),var(--accent-2)); border:0; border-radius:14px;
+    padding:15px; margin-top:6px; transition:filter .15s,transform .06s,box-shadow .15s;
+    box-shadow:0 12px 26px -10px color-mix(in srgb,var(--accent) 85%,transparent), 0 1px 0 rgba(255,255,255,.35) inset;
   }
-  button.submit:hover{filter:brightness(1.04)}
+  button.submit:hover{filter:brightness(1.06); transform:translateY(-1px)}
   button.submit:active{transform:translateY(1px)}
-  button.submit:disabled{opacity:.6; cursor:default}
+  button.submit:disabled{opacity:.6; cursor:default; transform:none}
 
-  .link-btn{font:inherit; font-size:13.5px; font-weight:600; color:var(--muted); background:none; border:0; cursor:pointer; padding:6px; margin:0 auto; display:block}
-  .link-btn:hover{color:var(--fg); text-decoration:underline}
-  .privacy{color:var(--muted); font-size:11.5px; text-align:center; margin:4px 0 0; display:flex; align-items:center; justify-content:center; gap:6px}
-  .privacy svg{width:13px; height:13px; stroke:var(--muted); flex:0 0 auto}
+  .link-btn{font:inherit; font-size:13.5px; font-weight:600; color:var(--muted); background:none; border:0; cursor:pointer; padding:7px; margin:0 auto; display:block}
+  .link-btn:hover{color:var(--fg)}
+  .privacy{color:var(--faint); font-size:11.5px; text-align:center; margin:6px 0 0; display:flex; align-items:center; justify-content:center; gap:6px}
+  .privacy svg{width:13px; height:13px; stroke:var(--faint); flex:0 0 auto}
 
-  .pending .ico{width:52px; height:52px; border-radius:50%; background:color-mix(in srgb,var(--accent) 16%,transparent); display:grid; place-items:center; margin:2px auto 4px}
-  .pending .ico svg{width:26px; height:26px; stroke:var(--accent-2)}
+  .pending .ico{width:56px; height:56px; border-radius:50%; background:color-mix(in srgb,var(--accent) 18%,var(--surface-3)); display:grid; place-items:center; margin:6px auto 4px; box-shadow:0 0 0 1px var(--line) inset}
+  .pending .ico svg{width:27px; height:27px; stroke:var(--accent)}
   .pending h1{text-align:center}
   .pending .lead{text-align:center}
-  .code-input{text-align:center; letter-spacing:.3em; font-weight:700; font-size:19px; text-transform:uppercase}
-  .code-input::placeholder{letter-spacing:.08em; font-weight:400; text-transform:none}
+  .code-input{text-align:center; letter-spacing:.32em; font-weight:700; font-size:20px; text-transform:uppercase}
+  .code-input::placeholder{letter-spacing:.1em; font-weight:400; text-transform:none}
 
-  .wait{display:flex; flex-direction:column; align-items:center; text-align:center; gap:15px; padding:26px 0}
-  .spin{width:42px; height:42px; border-radius:50%; border:3px solid var(--border-strong); border-top-color:var(--accent-2); animation:tourne 1s linear infinite}
+  .wait{display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; padding:30px 0}
+  .spin{width:44px; height:44px; border-radius:50%; border:3px solid var(--line-2); border-top-color:var(--accent); animation:tourne 1s linear infinite; box-shadow:0 0 22px -6px color-mix(in srgb,var(--accent) 70%,transparent)}
   @keyframes tourne{to{transform:rotate(360deg)}}
   @media (prefers-reduced-motion:reduce){.spin{animation-duration:2.5s}}
   .wait h2{font-family:var(--display); font-weight:700; font-size:20px; margin:0; letter-spacing:-.01em}
   .wait p{color:var(--muted); margin:0; font-size:14px; max-width:30ch}
 
-  .result{display:flex; flex-direction:column; align-items:center; text-align:center; gap:13px; padding:22px 0}
-  .result .mark{width:58px; height:58px; border-radius:50%; display:grid; place-items:center}
-  .result .mark svg{width:28px; height:28px}
-  .result.ok .mark{background:color-mix(in srgb,var(--good) 16%,transparent)}
+  .result{display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:26px 0}
+  .result .mark{width:64px; height:64px; border-radius:50%; display:grid; place-items:center; box-shadow:0 0 0 1px var(--line) inset}
+  .result .mark svg{width:30px; height:30px}
+  .result.ok .mark{background:color-mix(in srgb,var(--good) 18%,var(--surface-3)); box-shadow:0 0 0 1px color-mix(in srgb,var(--good) 40%,transparent) inset, 0 0 30px -8px var(--good)}
   .result.ok .mark svg{stroke:var(--good)}
-  .result.ko .mark{background:color-mix(in srgb,var(--bad) 16%,transparent)}
+  .result.ko .mark{background:color-mix(in srgb,var(--bad) 18%,var(--surface-3))}
   .result.ko .mark svg{stroke:var(--bad)}
-  .result h2{font-family:var(--display); font-weight:700; font-size:22px; margin:0; letter-spacing:-.01em}
+  .result h2{font-family:var(--display); font-weight:700; font-size:23px; margin:0; letter-spacing:-.01em}
   .result p{color:var(--muted); margin:0; font-size:14px; max-width:32ch}
-  .result button{font:inherit; font-weight:600; font-size:14px; cursor:pointer; background:transparent; color:var(--fg); border:1.5px solid var(--border-strong); border-radius:11px; padding:10px 18px; margin-top:4px}
-  .result button:hover{border-color:var(--accent-2)}
+  .result button{font:inherit; font-weight:600; font-size:14px; cursor:pointer; background:var(--surface-3); color:var(--fg); border:1px solid var(--line-2); border-radius:12px; padding:11px 20px; margin-top:4px}
+  .result button:hover{border-color:var(--accent)}
 
-  .msg{font-size:13px; padding:10px 12px; border-radius:11px; text-align:center}
-  .msg.err{background:color-mix(in srgb,var(--bad) 13%,transparent); color:var(--fg)}
+  .msg{font-size:13px; padding:11px 13px; border-radius:12px; text-align:center}
+  .msg.err{background:color-mix(in srgb,var(--bad) 16%,var(--surface)); border:1px solid color-mix(in srgb,var(--bad) 30%,transparent); color:var(--fg)}
 </style>
 </head>
 <body>
   <main class="card">
     <div class="hero">
       <div class="brand">
-        <span class="logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg></span>
+        <span class="logo" id="hero-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg></span>
         <span>
-          <span class="brand-name">SNAP+</span>
-          <span class="brand-tag">Abonnement premium</span>
+          <span class="brand-name" id="hero-name">Premium Store</span>
+          <span class="brand-tag" id="hero-tag">Abonnements &amp; crédits</span>
         </span>
-        <span class="pill">Officiel</span>
+        <span class="pill"><span class="dot"></span>En ligne</span>
       </div>
     </div>
 
     <div class="body">
-      <div id="vue-form">
-        <h1>Active ton abonnement</h1>
-        <p class="lead">Remplis tes infos, choisis ta formule et reçois ton code en quelques minutes.</p>
+      <div id="vue-services">
+        <h1>Tout ton premium au même endroit, activé en minutes.</h1>
+        <p class="lead">Réseaux, musique, jeux : choisis, laisse ton pseudo, reçois ton code. Rien à installer.</p>
+        <div class="trust">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>Livraison en minutes</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Validé avant paiement</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Support réactif</span>
+        </div>
+        <div class="services" id="liste-services"></div>
+      </div>
+
+      <div id="vue-form" hidden>
+        <h1 id="form-titre">Active ton abonnement</h1>
+        <p class="lead">Remplis tes infos et choisis ta formule. Tu reçois ton code juste après.</p>
 
         <form id="formulaire" novalidate>
+          <input type="hidden" name="service" id="service-field">
           <div class="field">
             <label for="prenom">Nom d'utilisateur</label>
             <input type="text" id="prenom" name="prenom" placeholder="Ex : spwwww_ldr" autocomplete="given-name" required>
@@ -188,30 +245,14 @@
           </div>
 
           <fieldset>
-            <legend>Choisis ta formule</legend>
-            <div class="plans">
-              <label class="plan">
-                <input type="radio" name="abonnement" value="3 mois" required>
-                <span class="tick"></span>
-                <span class="plan-text"><span class="plan-name">3 mois</span><span class="plan-desc">Pour essayer</span></span>
-              </label>
-              <label class="plan">
-                <input type="radio" name="abonnement" value="6 mois">
-                <span class="tick"></span>
-                <span class="plan-text"><span class="plan-name">6 mois</span><span class="plan-desc">Le choix malin</span></span>
-                <span class="badge">Populaire</span>
-              </label>
-              <label class="plan">
-                <input type="radio" name="abonnement" value="1 an">
-                <span class="tick"></span>
-                <span class="plan-text"><span class="plan-name">1 an</span><span class="plan-desc">Meilleure valeur</span></span>
-              </label>
-            </div>
+            <legend id="form-legend">Choisis ta formule</legend>
+            <div class="plans" id="liste-formules"></div>
           </fieldset>
 
           <div id="err-form" class="msg err" hidden></div>
           <button type="submit" class="submit" id="btn-envoyer">Je m'inscris</button>
           <button type="button" class="link-btn" id="lien-code">J'ai déjà un code d'accès</button>
+          <button type="button" class="link-btn" id="lien-services">← Changer de service</button>
           <p class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Aucune donnée partagée avec des tiers.</p>
         </form>
       </div>
@@ -222,6 +263,7 @@
         <p class="lead" id="code-texte">Tu vas recevoir un code. Saisis-le ci-dessous pour débloquer ton accès.</p>
 
         <form id="form-code" novalidate style="gap:14px">
+          <input type="hidden" name="service" id="service-field-code">
           <div class="field">
             <label for="code-prenom">Nom d'utilisateur</label>
             <input type="text" id="code-prenom" name="prenom" placeholder="Ton nom d'utilisateur" autocomplete="given-name" required>
@@ -249,7 +291,7 @@
       <div id="vue-ok" class="result ok" hidden>
         <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h2>Accès confirmé&nbsp;!</h2>
-        <p>Ton abonnement SNAP+ est activé. Bienvenue&nbsp;!</p>
+        <p id="ok-texte">Ton abonnement est activé. Bienvenue&nbsp;!</p>
       </div>
 
       <div id="vue-ko" class="result ko" hidden>
@@ -262,10 +304,108 @@
   </main>
 
   <script>
-    // "" = le formulaire parle au MÊME serveur qui l'affiche (Render). Ne pas changer.
-    const BASE_SERVEUR = "";
+    /* ====================================================================
+       ⚙️  TES SERVICES — c'est ICI que tu ajoutes / modifies tout.
+         id        : identifiant court et unique (sans espace)
+         cat       : le rayon ("Réseaux sociaux", "Musique", "Jeux")
+         nom       : nom affiché (ex. "SNAP+")
+         sigle     : 1 à 3 lettres pour le petit logo
+         tag       : sous-titre court
+         couleurs  : [couleur1, couleur2] du dégradé (codes hex)
+         formules  : liste des abonnements (value = ce qui part sur Telegram)
+    ==================================================================== */
+    const CATEGORIES = ["Réseaux sociaux", "Musique", "Jeux"];
+
+    const SERVICES = [
+      // ---- Réseaux sociaux ----
+      {
+        id: "snap", cat: "Réseaux sociaux", nom: "SNAP+", sigle: "S+", tag: "Premium Snapchat",
+        couleurs: ["#FFC400", "#FF8A1B"],
+        formules: [
+          { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
+          { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
+          { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "certif-snap", cat: "Réseaux sociaux", nom: "Certif Snap", sigle: "CS", tag: "Certification Snapchat",
+        couleurs: ["#5B8DEF", "#3B5BF0"],
+        formules: [
+          { value: "3 mois",  nom: "3 mois",  desc: "Pour essayer" },
+          { value: "5 mois",  nom: "5 mois",  desc: "Le choix malin", badge: "Populaire" },
+          { value: "10 mois", nom: "10 mois", desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "certif-insta", cat: "Réseaux sociaux", nom: "Certif Insta", sigle: "CI", tag: "Certification Instagram",
+        couleurs: ["#E95BD8", "#F4476B"],
+        formules: [
+          { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
+          { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
+          { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
+        ],
+      },
+      // ---- Musique ----
+      {
+        id: "spotify", cat: "Musique", nom: "Spotify", sigle: "SP", tag: "Premium Musique",
+        couleurs: ["#1ED760", "#12A24A"],
+        formules: [
+          { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
+          { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
+          { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "deezer", cat: "Musique", nom: "Deezer", sigle: "DZ", tag: "Premium Musique",
+        couleurs: ["#B373FF", "#7A4DF5"],
+        formules: [
+          { value: "3 mois", nom: "3 mois", desc: "Pour essayer" },
+          { value: "6 mois", nom: "6 mois", desc: "Le choix malin", badge: "Populaire" },
+          { value: "1 an",   nom: "1 an",   desc: "Meilleure valeur" },
+        ],
+      },
+      // ---- Jeux ----
+      {
+        id: "robux", cat: "Jeux", nom: "Robux", sigle: "R$", tag: "Crédits Roblox",
+        couleurs: ["#FFB020", "#F0730C"],
+        formules: [
+          { value: "2500 Robux",  nom: "2 500 Robux" },
+          { value: "5000 Robux",  nom: "5 000 Robux", badge: "Populaire" },
+          { value: "10000 Robux", nom: "10 000 Robux", desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "vbucks", cat: "Jeux", nom: "V-Bucks Fortnite", sigle: "VB", tag: "V-Bucks Fortnite",
+        couleurs: ["#6D8BFF", "#4F46E5"],
+        formules: [
+          { value: "2500 V-Bucks",  nom: "2 500 V-Bucks" },
+          { value: "5600 V-Bucks",  nom: "5 600 V-Bucks", badge: "Populaire" },
+          { value: "12500 V-Bucks", nom: "12 500 V-Bucks", desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "gta", cat: "Jeux", nom: "GTA$", sigle: "G$", tag: "Argent GTA Online",
+        couleurs: ["#4ADE80", "#16A34A"],
+        formules: [
+          { value: "10M GTA$",  nom: "10 M GTA$" },
+          { value: "50M GTA$",  nom: "50 M GTA$", badge: "Populaire" },
+          { value: "100M GTA$", nom: "100 M GTA$", desc: "Meilleure valeur" },
+        ],
+      },
+      {
+        id: "gemmes-cr", cat: "Jeux", nom: "Gemmes Clash Royale", sigle: "CR", tag: "Gemmes Clash Royale",
+        couleurs: ["#38E0F0", "#2C8BF0"],
+        formules: [
+          { value: "1000 gemmes", nom: "1 000 gemmes" },
+          { value: "2500 gemmes", nom: "2 500 gemmes", badge: "Populaire" },
+          { value: "5000 gemmes", nom: "5 000 gemmes", desc: "Meilleure valeur" },
+        ],
+      },
+    ];
+    /* ==================================================================== */
 
     const vues = {
+      services: document.getElementById("vue-services"),
       form: document.getElementById("vue-form"),
       code: document.getElementById("vue-code"),
       attente: document.getElementById("vue-attente"),
@@ -283,6 +423,64 @@
     const errCode = document.getElementById("err-code");
 
     let sondage = null;
+    let serviceActuel = null;
+
+    const liste = document.getElementById("liste-services");
+    function carteService(srv){
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "srv";
+      b.style.setProperty("--srv-a", srv.couleurs[0]);
+      b.style.setProperty("--srv-b", srv.couleurs[1]);
+      b.innerHTML =
+        '<span class="srv-logo">' + srv.sigle + '</span>' +
+        '<span class="srv-text"><span class="srv-name">' + srv.nom + '</span>' +
+        '<span class="srv-desc">' + srv.tag + '</span></span>' +
+        '<span class="srv-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>';
+      b.addEventListener("click", () => choisirService(srv));
+      return b;
+    }
+    CATEGORIES.forEach((cat) => {
+      const groupe = SERVICES.filter((s) => s.cat === cat);
+      if(!groupe.length) return;
+      const titre = document.createElement("div");
+      titre.className = "cat-title";
+      titre.innerHTML = '<span>' + cat + '</span><span class="cat-count">' + groupe.length + '</span>';
+      liste.appendChild(titre);
+      groupe.forEach((srv) => liste.appendChild(carteService(srv)));
+    });
+
+    function choisirService(srv){
+      serviceActuel = srv;
+      document.documentElement.style.setProperty("--accent", srv.couleurs[0]);
+      document.documentElement.style.setProperty("--accent-2", srv.couleurs[1]);
+
+      document.getElementById("hero-name").textContent = srv.nom;
+      document.getElementById("hero-tag").textContent = srv.tag;
+      document.getElementById("hero-logo").textContent = srv.sigle;
+      document.getElementById("form-titre").textContent = "Abonnement " + srv.nom;
+      document.getElementById("service-field").value = srv.nom;
+      document.getElementById("service-field-code").value = srv.nom;
+
+      const cont = document.getElementById("liste-formules");
+      cont.innerHTML = "";
+      srv.formules.forEach((f, i) => {
+        const lab = document.createElement("label");
+        lab.className = "plan";
+        lab.innerHTML =
+          '<input type="radio" name="abonnement" value="' + f.value + '"' + (i === 0 ? " required" : "") + '>' +
+          '<span class="tick"></span>' +
+          '<span class="plan-text"><span class="plan-name">' + f.nom + '</span>' +
+          (f.desc ? '<span class="plan-desc">' + f.desc + '</span>' : '') + '</span>' +
+          (f.badge ? '<span class="badge">' + f.badge + '</span>' : '');
+        cont.appendChild(lab);
+      });
+
+      errForm.hidden = true;
+      form.reset();
+      document.getElementById("service-field").value = srv.nom;
+      montrer("form");
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -296,7 +494,7 @@
 
       btnEnvoyer.disabled = true; btnEnvoyer.textContent = "Envoi…";
       try{
-        const res = await fetch(BASE_SERVEUR + "/submit", { method:"POST", body:new FormData(form) });
+        const res = await fetch("/submit", { method:"POST", body:new FormData(form) });
         const data = await res.json();
         if(data.ok){
           document.getElementById("code-prenom").value = prenom;
@@ -318,6 +516,7 @@
       document.getElementById("code-texte").textContent = "Saisis tes infos et le code qui t'a été fourni.";
       montrer("code");
     });
+    document.getElementById("lien-services").addEventListener("click", () => montrer("services"));
     document.getElementById("lien-retour").addEventListener("click", () => { errCode.hidden = true; montrer("form"); });
     document.getElementById("ko-retour").addEventListener("click", () => { montrer("code"); });
 
@@ -331,7 +530,7 @@
 
       btnCode.disabled = true; btnCode.textContent = "Envoi…";
       try{
-        const res = await fetch(BASE_SERVEUR + "/verifier", { method:"POST", body:new FormData(formCode) });
+        const res = await fetch("/verifier", { method:"POST", body:new FormData(formCode) });
         const data = await res.json();
         if(data.ok && data.id){ attendreDecision(data.id); }
         else { erreur(errCode, "Une erreur est survenue, réessaie."); }
@@ -355,9 +554,13 @@
           return;
         }
         try{
-          const res = await fetch(BASE_SERVEUR + "/statut?id=" + encodeURIComponent(id));
+          const res = await fetch("/statut?id=" + encodeURIComponent(id));
           const data = await res.json();
-          if(data.statut === "valide"){ clearInterval(sondage); montrer("ok"); }
+          if(data.statut === "valide"){
+            clearInterval(sondage);
+            if(serviceActuel){ document.getElementById("ok-texte").textContent = "Ton abonnement " + serviceActuel.nom + " est activé. Bienvenue !"; }
+            montrer("ok");
+          }
           else if(data.statut === "refuse"){
             clearInterval(sondage);
             document.getElementById("ko-texte").textContent = "Ce code n'a pas été validé. Vérifie auprès de nous et réessaie.";
